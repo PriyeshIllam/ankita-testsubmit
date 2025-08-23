@@ -1,7 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import BookingForm from "../../components/BookingForm";
-import { Event } from "@/utils/types";
-import "@testing-library/jest-dom";
+
+
 
 const mockEvent: Event = {
   id: "1",
