@@ -1,5 +1,6 @@
 'use client'
 import { useState } from "react";
+import SearchBar from "../components/SearchBar"; 
 
 export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -8,6 +9,7 @@ export default function HomePage() {
   
   return (
     <div >
+      <SearchBar />
       hi
     </div>
   );
