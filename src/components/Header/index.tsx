@@ -1,18 +1,19 @@
 import Link from "next/link";
+import styles from "./Header.module.css";
 
 export default function Header() {
   return (
-    <header>
-      <h1>Evently (Event Booking)</h1>
+    <header className={styles.header}>
+      <h1 className={styles.title}>Evently (Event Booking)</h1>
       <nav>
-        <ul>
-          <li>
+        <ul className={styles.navList}>
+          <li className={styles.navItem}>
             <Link href="/">Home</Link>
           </li>
-          <li>
+          <li className={styles.navItem}>
             <Link href="/events">Events</Link>
           </li>
-          <li>
+          <li className={styles.navItem}>
             <Link href="/bookings">Bookings</Link>
           </li>
         </ul>
