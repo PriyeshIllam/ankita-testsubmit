@@ -10,23 +10,19 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    if (onSearch) {
-      onSearch(value);
-    }
+    onSearch?.(value);
   };
 
   const handleClear = () => {
     setQuery("");
-    if (onSearch) {
-      onSearch("");
-    }
+    onSearch?.("");
   };
 
   return (
     <div>
+      {/* Using type="search" automatically sets role="searchbox" */}
       <input
-        type="text"
-        role="searchbox"
+        type="search"
         value={query}
         onChange={handleChange}
         placeholder="Search..."
