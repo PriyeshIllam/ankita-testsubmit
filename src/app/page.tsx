@@ -1,8 +1,10 @@
-'use client'
+'use client';
+
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import EventCard from "../components/EventCard";
-import { Event } from "../utils/types"; 
+import DateFilter from "../components/DateFilter";
+import { Event } from "../utils/types";
 
 const events: Event[] = [
   {
@@ -47,28 +49,50 @@ const events: Event[] = [
   }
 ];
 
-
-
 export default function HomePage() {
- const handleBookClick = (eventName: string) => {
-    alert(`You booked: ${eventName}`);
-  };
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
 
-  
+  const handleBookClick = (eventName: string) => {
+    alert(`You booked: ${eventName}`);
+  };
+
+  // Filter events based on date and search term
+  const filteredEvents = events.filter((event) => {
+    const matchesDate = selectedDate ? event.date === selectedDate : true;
+    const matchesSearch = searchTerm
+      ? event.name.toLowerCase().includes(searchTerm.toLowerCase())
+      : true;
+    return matchesDate && matchesSearch;
+  });
+
   return (
-    <div >
-      <SearchBar />
-      {events.map((event) => (
+    <div style={{ padding: "1rem" }}>
+      <h1>Upcoming Events</h1>
+
+      {/* Search Bar */}
+      <SearchBar onSearch={(term) => setSearchTerm(term)} />
+
+      {/* Date Filter */}
+      <DateFilter onChange={(date) => setSelectedDate(date)} />
+
+      {/* No events fallback */}
+      {filteredEvents.length === 0 && (
+        <p>
+          No events found for {selectedDate || searchTerm ? `${selectedDate || searchTerm}` : ""}
+        </p>
+      )}
+
+      {/* Events Grid */}
+      <div style={{ display: "grid", gap: "1rem", marginTop: "1rem" }}>
+        {filteredEvents.map((event) => (
           <EventCard
             key={event.id}
             event={event}
             onBookClick={() => handleBookClick(event.name)}
           />
         ))}
+      </div>
     </div>
   );
 }
-
