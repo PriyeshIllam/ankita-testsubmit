@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./DateFilter.module.css";
 
 interface DateFilterProps {
   onChange?: (date: string) => void;
@@ -10,19 +11,18 @@ export default function DateFilter({ onChange }: DateFilterProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedDate = e.target.value;
     setDate(selectedDate);
-    if (onChange) {
-      onChange(selectedDate);
-    }
+    onChange?.(selectedDate);
   };
 
   return (
-    <div>
-      <label htmlFor="date-filter">Date</label>
+    <div className={styles.container}>
+      <label htmlFor="date-filter" className={styles.label}>Date:</label>
       <input
         id="date-filter"
         type="date"
         value={date}
         onChange={handleChange}
+        className={styles.input}
       />
     </div>
   );

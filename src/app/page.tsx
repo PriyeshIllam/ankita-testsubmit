@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar";
 import EventCard from "../components/EventCard";
 import DateFilter from "../components/DateFilter";
 import { Event } from "../utils/types";
+import styles from "../components/EventCard/EventCard.module.css"; // <-- Import the CSS module
 
 const events: Event[] = [
   {
@@ -83,8 +84,8 @@ export default function HomePage() {
         </p>
       )}
 
-      {/* Events Grid */}
-      <div style={{ display: "grid", gap: "1rem", marginTop: "1rem" }}>
+      {/* Events Grid using the CSS module */}
+      <div className={styles.cardsContainer}>
         {filteredEvents.map((event) => (
           <EventCard
             key={event.id}
