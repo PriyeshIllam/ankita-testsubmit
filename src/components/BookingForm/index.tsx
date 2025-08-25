@@ -24,16 +24,33 @@ export default function BookingForm({ event, onCancel, onConfirm }: BookingFormP
   const [quantity, setQuantity] = useState<number | string>("");
   const [error, setError] = useState("");
 
+  const validateEmail = (email: string) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const handleSubmit = () => {
     if (!name || !email || !quantity) {
       setError("Please fill all fields");
       return;
     }
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email");
+      return;
+    }
+
     const qty = Number(quantity);
+    if (qty < 1) {
+      setError("Quantity must be at least 1");
+      return;
+    }
+
     if (qty > event.seats) {
       setError(`Only ${event.seats} seats available`);
       return;
     }
+
     setError("");
     onConfirm({ eventId: event.id, name, email, quantity: qty });
   };
