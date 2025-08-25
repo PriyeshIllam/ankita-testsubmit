@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./BookingForm.module.css";
 
 interface Event {
   id: string;
@@ -38,43 +39,52 @@ export default function BookingForm({ event, onCancel, onConfirm }: BookingFormP
   };
 
   return (
-    <div>
-      <div>
-        <label htmlFor="name">Name</label>
+    <div className={styles.container}>
+      <div className={styles.field}>
+        <label htmlFor="name" className={styles.label}>Name</label>
         <input
           id="name"
           aria-label="Name"
+          className={styles.input}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
+
+      <div className={styles.field}>
+        <label htmlFor="email" className={styles.label}>Email</label>
         <input
           id="email"
-          aria-label="Email"
           type="email"
+          aria-label="Email"
+          className={styles.input}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="quantity">Quantity</label>
+
+      <div className={styles.field}>
+        <label htmlFor="quantity" className={styles.label}>Quantity</label>
         <input
           id="quantity"
-          aria-label="Quantity"
           type="number"
+          aria-label="Quantity"
+          className={styles.input}
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
         />
       </div>
-      {error && <p>{error}</p>}
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
-      <button type="button" onClick={handleSubmit}>
-        Confirm booking
-      </button>
+
+      {error && <p className={styles.error}>{error}</p>}
+
+      <div className={styles.buttonGroup}>
+        <button type="button" className={`${styles.button} ${styles.cancelButton}`} onClick={onCancel}>
+          Cancel
+        </button>
+        <button type="button" className={`${styles.button} ${styles.confirmButton}`} onClick={handleSubmit}>
+          Confirm booking
+        </button>
+      </div>
     </div>
   );
 }
