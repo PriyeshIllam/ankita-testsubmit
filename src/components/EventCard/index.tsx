@@ -1,4 +1,5 @@
-import { Event } from "../../utils/types"; 
+import { Event } from "../../utils/types";
+import styles from "./EventCard.module.css";
 
 interface EventCardProps {
   event: Event;
@@ -7,17 +8,18 @@ interface EventCardProps {
 
 export default function EventCard({ event, onBookClick }: EventCardProps) {
   return (
-    <div className="event-card border p-4 rounded shadow">
-      <h2>{event.name}</h2>
-      <p>
-        {event.date} - {event.location}
+    <div className={styles.card}>
+      <h2 className={styles.title}>{event.name}</h2>
+      <p className={styles.dateLocation}>
+        {event.date} – {event.location}
       </p>
-      <p>{event.description}</p>
-      <p>Seats: {event.seats}</p>
-      <p>Price: ${event.price}</p>
-      <button type="button" onClick={onBookClick}>
+      <p className={styles.description}>{event.description}</p>
+      <p className={styles.seats}>Seats: {event.seats}</p>
+      <p className={styles.price}>Price: ${event.price}</p>
+      <button className={styles.button} type="button" onClick={onBookClick}>
         Book Now
       </button>
     </div>
   );
 }
+
